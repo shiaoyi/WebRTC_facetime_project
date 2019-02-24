@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="餘額："
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="135dp" />
+
+    <TextView
+        android:id="@+id/tvRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        android:layout_toRightOf="@+id/balance"
+        android:layout_alignBottom="@+id/balance"/>
+
+    <TextView
+        android:id="@+id/tvDeposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance"
+        android:layout_alignRight="@+id/balance"
+        android:text="儲值："
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_opay"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/tvDeposit"
+        android:layout_alignBottom="@+id/tvDeposit"
+        android:layout_marginRight="10dp"
+        android:text="@string/opay"
+        android:textSize="18dp"
+        style="@style/button_set" />
+
+    <Button
+        android:id="@+id/button_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button_opay"
+        android:layout_alignBottom="@+id/tvDeposit"
+        android:text="@string/credit_card"
+        android:textSize="18dp"
+        style="@style/button_set"/>
+
+    <TextView
+        android:id="@+id/tvCoupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvDeposit"
+        android:layout_below="@+id/tvDeposit"
+        android:text="優惠代碼："
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etCoupon"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_toRightOf="@+id/tvCoupon"
+        android:layout_alignBottom="@+id/tvCoupon"
+        android:inputType="text"
+        android:textSize="24sp"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/coupon_del"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="12dp"
+        android:layout_alignBottom="@+id/etCoupon"
+        android:layout_alignEnd="@+id/etCoupon"
+        android:layout_alignRight="@+id/etCoupon"
+        android:background="@drawable/del_button" />
+
+    <Button
+        android:id="@+id/button_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/button_opay"
+        android:layout_below="@+id/tvCoupon"
+        android:text="送出"
+        style="@style/button_set"
+        />
+
+    <!--android:background="@drawable/btn_submit"-->
+
+
+
+</RelativeLayout>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chopreter</string>
+    <string name="settings_name">Chopreter Settings</string>
+    <string name="disconnect_call">Disconnect Call</string>
+    <string name="room_description">
+        Please enter a room name. Room names are shared with everyone, so think
+        of something unique and send it to a friend.
+    </string>
+    <string name="contacts">Contacts</string>
+    <string name="no_favorites">No favorites</string>
+    <string name="invalid_url_title">Invalid URL</string>
+    <string name="invalid_url_text">The URL or room name you entered resulted in an invalid URL: %1$s
+    </string>
+    <string name="channel_error_title">Connection error</string>
+    <string name="connecting_to">Connecting to: %1$s</string>
+    <string name="missing_url">FATAL ERROR: Missing URL to connect to.</string>
+    <string name="camera2_texture_only_error">Camera2 only supports capturing to texture. Either disable Camera2 or enable capturing to texture in the options.</string>
+    <string name="ok">OK</string>
+    <string name="switch_camera">Switch front/back camera</string>
+    <string name="capture_format_change_text">Slide to change capture format</string>
+    <string name="muted">Muted</string>
+    <string name="toggle_debug">Toggle debug view</string>
+    <string name="toggle_mic">Toggle microphone on/off</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_loopback">Loopback connection</string>
+    <string name="connect_description">Connect to the room</string>
+    <string name="add_favorite_description">Add favorite</string>
+    <string name="format_description">%1$dx%2$d @ %3$d fps</string>
+
+    <!-- Settings strings. -->
+    <string name="pref_room_key">room_preference</string>
+    <string name="pref_room_list_key">room_list_preference</string>
+
+    <string name="pref_videosettings_key">video_settings_key</string>
+    <string name="pref_videosettings_title">WebRTC video settings.</string>
+
+    <string name="pref_videocall_key">videocall_preference</string>
+    <string name="pref_videocall_title">Video call.</string>
+    <string name="pref_videocall_dlg">Enable video in a call.</string>
+    <string name="pref_videocall_default">true</string>
+
+    <string name="pref_screencapture_key">screencapture_preference</string>
+    <string name="pref_screencapture_title">Use screencapture.</string>
+    <string name="pref_screencapture_default">false</string>
+
+    <string name="pref_camera2_key">camera2_preference</string>
+    <string name="pref_camera2_title">Use Camera2.</string>
+    <string name="pref_camera2_default">true</string>
+    <string name="pref_camera2_not_supported">Not supported on this device.</string>
+
+    <string name="pref_resolution_key">resolution_preference</string>
+    <string name="pref_resolution_title">Video resolution.</string>
+    <string name="pref_resolution_dlg">Enter AppRTC local video resolution.</string>
+    <string name="pref_resolution_default">Default</string>
+
+    <string name="pref_fps_key">fps_preference</string>
+    <string name="pref_fps_title">Camera fps.</string>
+    <string name="pref_fps_dlg">Enter local camera fps.</string>
+    <string name="pref_fps_default">Default</string>
+
+    <string name="pref_capturequalityslider_key">capturequalityslider_preference</string>
+    <string name="pref_capturequalityslider_title">Capture quality slider.</string>
+    <string name="pref_capturequalityslider_dlg">Enable slider for changing capture quality.</string>
+    <string name="pref_capturequalityslider_default">false</string>
+
+    <string name="pref_maxvideobitrate_key">maxvideobitrate_preference</string>
+    <string name="pref_maxvideobitrate_title">Maximum video bitrate setting.</string>
+    <string name="pref_maxvideobitrate_dlg">Maximum video bitrate setting.</string>
+    <string name="pref_maxvideobitrate_default">Default</string>
+
+    <string name="pref_maxvideobitratevalue_key">maxvideobitratevalue_preference</string>
+    <string name="pref_maxvideobitratevalue_title">Video encoder maximum bitrate.</string>
+    <string name="pref_maxvideobitratevalue_dlg">Enter video encoder maximum bitrate in kbps.</string>
+    <string name="pref_maxvideobitratevalue_default">1700</string>
+
+    <string name="pref_videocodec_key">videocodec_preference</string>
+    <string name="pref_videocodec_title">Default video codec.</string>
+    <string name="pref_videocodec_dlg">Select default video codec.</string>
+    <string name="pref_videocodec_default">VP8</string>
+
+    <string name="pref_hwcodec_key">hwcodec_preference</string>
+    <string name="pref_hwcodec_title">Video codec hardware acceleration.</string>
+    <string name="pref_hwcodec_dlg">Use hardware accelerated video codec (if available).</string>
+    <string name="pref_hwcodec_default">true</string>
+
+    <string name="pref_capturetotexture_key">capturetotexture_preference</string>
+    <string name="pref_capturetotexture_title">Video capture to surface texture.</string>
+    <string name="pref_capturetotexture_dlg">Capture video to textures (if available).</string>
+    <string name="pref_capturetotexture_default">true</string>
+
+    <string name="pref_flexfec_key">flexfec_preference</string>
+    <string name="pref_flexfec_title">Codec-agnostic Flexible FEC.</string>
+    <string name="pref_flexfec_dlg">Enable FlexFEC.</string>
+    <string name="pref_flexfec_default">false</string>
+
+    <string name="pref_value_enabled">Enabled</string>
+    <string name="pref_value_disabled">Disabled</string>
+
+    <string name="pref_audiosettings_key">audio_settings_key</string>
+    <string name="pref_audiosettings_title">WebRTC audio settings.</string>
+
+    <string name="pref_startaudiobitrate_key">startaudiobitrate_preference</string>
+    <string name="pref_startaudiobitrate_title">Audio bitrate setting.</string>
+    <string name="pref_startaudiobitrate_dlg">Audio bitrate setting.</string>
+    <string name="pref_startaudiobitrate_default">Default</string>
+
+    <string name="pref_startaudiobitratevalue_key">startaudiobitratevalue_preference</string>
+    <string name="pref_startaudiobitratevalue_title">Audio codec bitrate.</string>
+    <string name="pref_startaudiobitratevalue_dlg">Enter audio codec bitrate in kbps.</string>
+    <string name="pref_startaudiobitratevalue_default">32</string>
+
+    <string name="pref_audiocodec_key">audiocodec_preference</string>
+    <string name="pref_audiocodec_title">Default audio codec.</string>
+    <string name="pref_audiocodec_dlg">Select default audio codec.</string>
+    <string name="pref_audiocodec_default">OPUS</string>
+
+    <string name="pref_noaudioprocessing_key">audioprocessing_preference</string>
+    <string name="pref_noaudioprocessing_title">Disable audio processing.</string>
+    <string name="pref_noaudioprocessing_dlg">Disable audio processing pipeline.</string>
+    <string name="pref_noaudioprocessing_default">false</string>
+
+    <string name="pref_aecdump_key">aecdump_preference</string>
+    <string name="pref_aecdump_title">Create aecdump.</string>
+    <string name="pref_aecdump_dlg">Enable diagnostic audio recordings.</string>
+    <string name="pref_aecdump_default">false</string>
+
+    <string name="pref_opensles_key">opensles_preference</string>
+    <string name="pref_opensles_title">Use OpenSL ES for audio playback.</string>
+    <string name="pref_opensles_dlg">Use OpenSL ES for audio playback.</string>
+    <string name="pref_opensles_default">false</string>
+
+    <string name="pref_disable_built_in_aec_key">disable_built_in_aec_preference</string>
+    <string name="pref_disable_built_in_aec_title">Disable hardware AEC.</string>
+    <string name="pref_disable_built_in_aec_dlg">Disable hardware AEC.</string>
+    <string name="pref_disable_built_in_aec_default">false</string>
+    <string name="pref_built_in_aec_not_available">Hardware AEC is not available</string>
+
+    <string name="pref_disable_built_in_agc_key">disable_built_in_agc_preference</string>
+    <string name="pref_disable_built_in_agc_title">Disable hardware AGC.</string>
+    <string name="pref_disable_built_in_agc_dlg">Disable hardware AGC.</string>
+    <string name="pref_disable_built_in_agc_default">false</string>
+    <string name="pref_built_in_agc_not_available">Hardware AGC is not available</string>
+
+    <string name="pref_disable_built_in_ns_key">disable_built_in_ns_preference</string>
+    <string name="pref_disable_built_in_ns_title">Disable hardware NS.</string>
+    <string name="pref_disable_built_in_ns_dlg">Disable hardware NS.</string>
+    <string name="pref_disable_built_in_ns_default">false</string>
+    <string name="pref_built_in_ns_not_available">Hardware NS is not available</string>
+
+    <string name="pref_enable_level_control_key">enable_level_control_preference</string>
+    <string name="pref_enable_level_control_title">Enable level control.</string>
+    <string name="pref_enable_level_control_default">false</string>
+
+    <string name="pref_disable_webrtc_agc_and_hpf_key">disable_webrtc_agc_and_hpf_preference</string>
+    <string name="pref_disable_webrtc_agc_and_hpf_title">Disable WebRTC AGC and HPF.</string>
+    <string name="pref_disable_webrtc_agc_default">false</string>
+
+    <string name="pref_speakerphone_key">speakerphone_preference</string>
+    <string name="pref_speakerphone_title">Speakerphone.</string>
+    <string name="pref_speakerphone_dlg">Speakerphone.</string>
+    <string name="pref_speakerphone_default">auto</string>
+
+    <string name="pref_datasettings_key">data_settings_key</string>
+    <string name="pref_datasettings_title">WebRTC data channel settings.</string>
+
+    <string name="pref_enable_datachannel_key">enable_datachannel_preference</string>
+    <string name="pref_enable_datachannel_title">Enable datachannel.</string>
+    <string name="pref_enable_datachannel_default" translatable="false">true</string>
+
+    <string name="pref_ordered_key">ordered_preference</string>
+    <string name="pref_ordered_title">Order messages.</string>
+    <string name="pref_ordered_default" translatable="false">true</string>
+
+    <string name="pref_data_protocol_key">Subprotocol</string>
+    <string name="pref_data_protocol_title">Subprotocol.</string>
+    <string name="pref_data_protocol_dlg">Enter subprotocol.</string>
+    <string name="pref_data_protocol_default" translatable="false"></string>
+
+    <string name="pref_negotiated_key">negotiated_preference</string>
+    <string name="pref_negotiated_title">Negotiated.</string>
+    <string name="pref_negotiated_default" translatable="false">false</string>
+
+    <string name="pref_max_retransmit_time_ms_key">max_retransmit_time_ms_preference</string>
+    <string name="pref_max_retransmit_time_ms_title">Max delay to retransmit.</string>
+    <string name="pref_max_retransmit_time_ms_dlg">Enter max delay to retransmit (in ms).</string>
+    <string name="pref_max_retransmit_time_ms_default" translatable="false">-1</string>
+
+    <string name="pref_max_retransmits_key">max_retransmits_preference</string>
+    <string name="pref_max_retransmits_title">Max attempts to retransmit.</string>
+    <string name="pref_max_retransmits_dlg">Enter max attempts to retransmit.</string>
+    <string name="pref_max_retransmits_default" translatable="false">-1</string>
+
+    <string name="pref_data_id_key">data_id_preference</string>
+    <string name="pref_data_id_title">Data id.</string>
+    <string name="pref_data_id_dlg">Enter data channel id.</string>
+    <string name="pref_data_id_default" translatable="false">-1</string>
+
+    <string name="pref_miscsettings_key">misc_settings_key</string>
+    <string name="pref_miscsettings_title">Miscellaneous settings.</string>
+
+    <string name="pref_room_server_url_key">room_server_url_preference</string>
+    <string name="pref_room_server_url_title">Room server URL.</string>
+    <string name="pref_room_server_url_dlg">Enter a room server URL.</string>
+    <string name="pref_room_server_url_default" translatable="false">https://appr.tc</string>
+
+    <string name="pref_displayhud_key">displayhud_preference</string>
+    <string name="pref_displayhud_title">Display call statistics.</string>
+    <string name="pref_displayhud_dlg">Display call statistics.</string>
+    <string name="pref_displayhud_default" translatable="false">false</string>
+
+    <string name="pref_tracing_key">tracing_preference</string>
+    <string name="pref_tracing_title">Debug performance tracing.</string>
+    <string name="pref_tracing_dlg">Debug performance tracing.</string>
+    <string name="pref_tracing_default" translatable="false">false</string>
+    <string name="text_Open">Open</string>
+    <string name="text_Close">Close</string>
+    <string name="page_Main">Chopreter</string>
+    <string name="page_Record">Record</string>
+    <string name="page_Deposit">Deposit</string>
+    <string name="page_Settings">Settings</string>
+    <string name="page_Logout">Logout</string>
+    <string name="page_Booking">Booking</string>
+    <string name="language_english">English</string>
+    <string name="language_vietnam">Vietnam</string>
+    <string name="language_indonesia">Indonesia</string>
+    <string name="text_btDatePicker">Date</string>
+    <string name="text_btTimePickerStart"> Start </string>
+    <string name="text_btTimePickerEnd"> Finish </string>
+    <string name="text_tvTime">HH:MM</string>
+    <string name="text_tvDate">YYYY-MM-DD</string>
+    <string name="text_tvReserveDate">Reservation Date</string>
+    <string name="text_tvReserveTime">Reservation Time</string>
+    <string name="text_tvLanguage">Interpret Language</string>
+    <string name="text_spLanguage">--Language--</string>
+    <string name="text_tvTranslator">Translator ID</string>
+    <string name="text_btSubmit">Submit</string>
+    <string name="page_Favorite">Favorites</string>
+    <string name="item_removeContacts">Remove this Contact</string>
+    <string name="item_addContacts">Add this Contact to Favoriates</string>
+    <string name="tv_experience">Experience</string>
+    <string name="tv_called"> called ,</string>
+    <string name="tv_comments"> comments.</string>
+    <string name="opay">O\'Pay</string>
+    <string name="credit_card">Credit Card</string>
+    <!--About Login-->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="action_interpreter_sign_up">Interpreter Sign up</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="action_interpreter_log_in">Intepreter Log in</string>
+    <string name="action_log_in">Log in</string>
+    <string name="ForgetMsg">Forget your password?</string>
+    <string name="beWho">What do you want to be ?</string>
+    <string name="username">Username</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="arrow">\u2194</string>
+    <string name="language_chinese">Chinese</string>
+    <string name="page_TransProfile">Interpreter Profile</string>
+    <string name="page_Comment">Comment</string>
+    <string name="page_Score">Scoreboard</string>
+    <string name="ques_Comment">How was the service?</string>
+    <string name="cancel">Cancel</string>
+    <string name="write_Comment">Describe your experience</string>
+    <string name="page_Account">Your Account</string>
+    <string name="account_balance">Balance</string>
+    <string name="already_score_count">Scored</string>
+    <string name="view_List"><![CDATA[View all >]]></string>
+    <string name="choose_pic">Choose profile photo</string>
+    <string name="already_signup">Already a member?  Login Here</string>
+    <string name="retyped_password">Retyped Password</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="tvGender">• Gender</string>
+    <string name="tvPay">• Receipt (VISA、MASTER CARD、JCB)</string>
+    <string name="next_step">Next</string>
+    <string name="tvCardNum">Card Number</string>
+    <string name="tv_exper">• Experience</string>
+    <string name="et_experience">Write down your interpreting experience...</string>
+    <string name="tvPersonal">• Account imformation</string>
+    <string name="text_tvLang">• Interpret Language</string>
+    <string name="nickname">Nickname</string>
+    <string name="text_usualLang">• Your Language</string>
+    <string name="page_Schedule">Schedule</string>
+    <string name="page_Profile">Profile</string>
+    <string name="page_Order">Order</string>
+    <string name="page_Receipt">Receipt</string>
+    <string name="calling">Calling...</string>
+    <string name="score">Star</string>
+    <string name="tvVisited">Service</string>
+    <string name="ques_logout">Are you sure you want to Logout?</string>
+    <string name="btnOnline">Online</string>
+    <string name="tvTextGender">Gender</string>
+    <string name="card_info">Credit card information </string>
+    <string name="say">Anything want to say?</string>
+    <string name="ques_Reservation_Accept">Do you want to accept the booking?</string>
+    <string name="id_receipt">Receipt ID</string>
+    <string name="situation_receipt">Receipt Status</string>
+    <string name="dollar_receipt">Amount</string>
+    <string name="payday_receipt">Receipt Day</string>
+    <string name="change_profile">Change Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="error_dismatch_password">Password Dismatch</string>
+    <string name="terms_agree">I agree Terms and Service</string>
+    <string name="upload_pic">Upload photo</string>
+    <string name="error_lang">The same language!</string>
+    <string name="error_photo_required">Please set your Photo</string>
+    <string name="first_login">Dear Customer，you will get a one-hundred dollar coupon in first time login，check in \"Deposit\" !。</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="error_match_time">The same as the beginning</string>
+    <string name="Appointees">Appointees:</string>
+    <string name="date">Date:</string>
+    <string name="StartTime">Start Time:</string>
+    <string name="finishTime">Finish Time:</string>
+    <string name="otherRequires">Other Requires:</string>
+    <string name="connect_call">Pick up</string>
+    <string name="chopreter_calling">Chopreter Calling...</string>
+    <string name="page_Calling">Calling</string>
+    <string name="interpret">Interpret</string>
+    <string name="no_booking">No Events Planned for that day</string>
+    <string name="tv_id">ID</string>
+    <string name="loging">Signing In . . .</string>
+</resources>

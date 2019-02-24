@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditCard">
+
+    <TextView
+        android:id="@+id/card_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="135dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:text="卡號：" />
+
+    <Button
+        android:id="@+id/button_editp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="305dp"
+        android:layout_marginTop="135dp"
+        android:background="@drawable/edit_pen"/>
+
+    <TextView
+        android:id="@+id/card_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="135dp"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/card_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="195dp"
+        android:text="金額：" />
+
+    <Button
+        android:id="@+id/button_oneh"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="185dp"
+        android:text="$ 100"
+        android:textSize="16dp"
+        android:background="@drawable/btn_background"  />
+
+    <Button
+        android:id="@+id/button_three_h"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="245dp"
+        android:layout_marginTop="185dp"
+        android:text="$ 300"
+        android:textSize="16dp"
+        android:background="@drawable/btn_background" />
+
+    <Button
+        android:id="@+id/button_fiveh"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="255dp"
+        android:text="$ 500"
+        android:textSize="16dp"
+        android:background="@drawable/btn_background"/>
+
+    <Button
+        android:id="@+id/button_onet"
+        android:background="@drawable/btn_background"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="245dp"
+        android:layout_marginTop="255dp"
+        android:textSize="16dp"
+        android:text="$ 1000" />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="245dp"
+        android:layout_marginTop="400dp"
+        android:text="送出"
+        android:textSize="20dp"
+        android:background="@drawable/btn_submit" />
+
+</RelativeLayout>

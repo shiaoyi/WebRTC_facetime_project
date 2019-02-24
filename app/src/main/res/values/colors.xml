@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#a8c7e2</color>
+    <color name="colorPrimaryDark">#a8c7e2</color>
+    <color name="colorAccent">#92837E</color>
+    <color name="colorbgc">#EDE6DE</color>
+    <color name="colorGold">#DEBC8B</color>
+    <color name="black">#555555</color>
+    <color name="colorContent">#92837E</color>
+    <color name="lightGray">#cccccc</color>
+    <color name="logoGray">#7E7E7E</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ffff4444</color>
+</resources>

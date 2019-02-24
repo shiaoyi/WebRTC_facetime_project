@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+
+    <TextView
+        android:id="@+id/tvQComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/dialog_ratingbar"
+        android:layout_alignStart="@+id/dialog_ratingbar"
+        android:textSize="16dp"
+        android:textColor="#777777"
+        android:text="@string/ques_Comment" />
+
+    <RatingBar
+        android:id="@+id/dialog_ratingbar"
+        android:layout_below="@+id/tvQComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:theme="@style/RatingBarStyle"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/etDesExperience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dialog_ratingbar"
+        android:layout_alignStart="@+id/dialog_ratingbar"
+        android:layout_below="@+id/dialog_ratingbar"
+        android:ems="10"
+        android:hint="@string/write_Comment"
+        android:inputType="textCapSentences|textAutoCorrect" />
+
+
+
+
+</RelativeLayout>

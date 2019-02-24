@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivBookingImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/p04"
+        android:layout_marginBottom="6dp"/>
+
+    <TextView
+        android:id="@+id/tvTextBookingName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_below="@+id/ivBookingImage"
+        android:text = "@string/Appointees"
+        android:textStyle="bold"
+        android:layout_marginBottom="3dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvTextBookingName"
+        android:layout_alignBaseline="@+id/tvTextBookingName"
+        android:textSize="16dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/tvTextBookingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:text = "@string/date"
+        android:layout_below="@+id/tvTextBookingName"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvTextBookingDate"
+        android:layout_alignBottom="@+id/tvTextBookingDate"
+        android:textSize="16dp"
+        android:text="date" />
+
+    <TextView
+        android:id="@+id/tvTextBookingStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:text = "@string/StartTime"
+        android:layout_below="@+id/tvTextBookingDate"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvTextBookingStartTime"
+        android:layout_alignBottom="@+id/tvTextBookingStartTime"
+        android:textSize="16dp"
+        android:text="starttime" />
+
+    <TextView
+        android:id="@+id/tvTextBookingEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:text = "@string/finishTime"
+        android:layout_below="@+id/tvTextBookingStartTime"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvTextBookingEndTime"
+        android:layout_alignBottom="@+id/tvTextBookingEndTime"
+        android:textSize="16dp"
+        android:text="finishtime" />
+
+    <TextView
+        android:id="@+id/tvTextBookingComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:text = "@string/otherRequires"
+        android:layout_below="@+id/tvTextBookingEndTime"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvTextBookingComment"
+        android:layout_alignTop="@+id/tvTextBookingComment"
+        android:textSize="16dp"
+        android:text="comments" />
+
+    <TextView
+        android:id="@+id/tvQReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text = "@string/ques_Reservation_Accept"
+        android:layout_below="@+id/tvBookingComment"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnAccept"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/tvQReservation"
+        android:layout_toRightOf="@+id/tvQReservation"
+        android:text="@string/accept"/>
+
+    <Button
+        android:id="@+id/btnRefuse"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/tvQReservation"
+        android:layout_toRightOf="@+id/btnAccept"
+        android:text="@string/refuse"/>
+
+</RelativeLayout>

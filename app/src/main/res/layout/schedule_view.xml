@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivBookingImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/p01"
+        app:civ_border_color="@android:color/transparent"
+        app:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBookingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Name" />
+
+
+        <TextView
+            android:id="@+id/tvBookingComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:textColor="@color/logoGray"
+            android:padding="2dp"
+            android:text="comment..."/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvBookingDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tvBookingEndTime"
+            android:padding="0dp"
+            android:textSize="14dp"
+            android:text="20180101"
+            android:textColor="@color/lightGray" />
+
+
+            <TextView
+                android:id="@+id/tvBookingStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBookingDate"
+                android:padding="0dp"
+                android:textSize="14dp"
+                android:text="18:00"
+                android:textColor="@color/lightGray"
+                android:layout_gravity="right" />
+
+            <View
+                android:id="@+id/line_time"
+                android:layout_width="7dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tvBookingDate"
+                android:layout_toRightOf="@id/tvBookingStartTime"
+                android:layout_marginTop="9dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@color/lightGray" />
+
+            <TextView
+                android:id="@+id/tvBookingEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBookingDate"
+                android:layout_toRightOf="@id/line_time"
+                android:padding="0dp"
+                android:textSize="14dp"
+                android:text="21:00"
+                android:textColor="@color/lightGray"
+                android:layout_gravity="right" />
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

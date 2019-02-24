@@ -10,9 +10,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/buttons_call_container"
         android:textSize="24sp"
         android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_call_container"
+        android:layout_alignLeft="@+id/buttons_call_container"
+        android:layout_alignStart="@+id/buttons_call_container"
+        android:text=""
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_call_container"
+        android:layout_centerHorizontal="true"
+        android:text="0:0"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dollar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_call_container"
+        android:layout_alignRight="@+id/buttons_call_container"
+        android:text=""
+        android:textSize="18sp" />
 
     <LinearLayout
            android:id="@+id/buttons_call_container"

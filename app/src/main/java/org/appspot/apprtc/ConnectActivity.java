@@ -18,6 +18,10 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -41,7 +45,7 @@ import org.json.JSONException;
 /**
  * Handles the initial setup where the user selects which room to join.
  */
-public class ConnectActivity extends Activity {
+public class ConnectActivity extends AppCompatActivity {
   private static final String TAG = "ConnectActivity";
   private static final int CONNECTION_REQUEST = 1;
   private static final int REMOVE_FAVORITE_INDEX = 0;
@@ -90,6 +94,8 @@ public class ConnectActivity extends Activity {
   private String keyprefNegotiated;
   private String keyprefDataId;
 
+  Boolean Apreter;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -135,6 +141,8 @@ public class ConnectActivity extends Activity {
 
     setContentView(R.layout.activity_connect);
 
+    showCalling();
+
     roomEditText = (EditText) findViewById(R.id.room_edittext);
     roomEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
@@ -169,6 +177,16 @@ public class ConnectActivity extends Activity {
     }
   }
 
+  private void showCalling(){
+    Bundle bundle = getIntent().getExtras();
+    if (bundle == null) {
+      return;
+    }
+    String room = bundle.getString("RoomId");
+    Apreter = bundle.getBoolean("Apreter");
+    connectToRoom(room,false,false,false,0);
+  }
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.connect_menu, menu);
@@ -182,7 +200,7 @@ public class ConnectActivity extends Activity {
       menu.setHeaderTitle(roomList.get(info.position));
       String[] menuItems = getResources().getStringArray(R.array.roomListContextMenu);
       for (int i = 0; i < menuItems.length; i++) {
-        menu.add(Menu.NONE, i, i, menuItems[i]);
+        menu.add(Menu.NONE, i, i, menuItems[i]);//參數1:群組id, 參數2:itemId, 參數3:item順序, 參數4:item名稱
       }
     } else {
       super.onCreateContextMenu(menu, v, menuInfo);
@@ -206,15 +224,32 @@ public class ConnectActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     // Handle presses on the action bar items.
     if (item.getItemId() == R.id.action_settings) {
-      Intent intent = new Intent(this, SettingsActivity.class);
+      Intent intent = new Intent(this, SettingActivity.class);
       startActivity(intent);
       return true;
-    } else if (item.getItemId() == R.id.action_loopback) {
-      connectToRoom(null, false, true, false, 0);
+    }
+    else if (item.getItemId() == R.id.lang_english) {
+      Fragment fragment = new HomeFragment();
+      switchFragment(fragment);
+      setTitle(R.string.language_english);
       return true;
-    } else {
+    }
+    else if (item.getItemId() == R.id.lang_indonesia) {
+      Fragment fragment = new IndonesiaFragment();
+      switchFragment(fragment);
+      setTitle(R.string.language_indonesia);
+      return true;
+    }
+    else {
       return super.onOptionsItemSelected(item);
     }
+  }
+
+  private void switchFragment(Fragment fragment){
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.body,fragment);
+    fragmentTransaction.commit();
   }
 
   @Override
@@ -319,7 +354,7 @@ public class ConnectActivity extends Activity {
     }
   }
 
-  private void connectToRoom(String roomId, boolean commandLineRun, boolean loopback,
+  public void connectToRoom(String roomId, boolean commandLineRun, boolean loopback,
       boolean useValuesFromIntent, int runTimeMs) {
     this.commandLineRun = commandLineRun;
 
@@ -507,6 +542,7 @@ public class ConnectActivity extends Activity {
       Uri uri = Uri.parse(roomUrl);
       Intent intent = new Intent(this, CallActivity.class);
       intent.setData(uri);
+      intent.putExtra(CallActivity.EXTRA_APRETER, Apreter);
       intent.putExtra(CallActivity.EXTRA_ROOMID, roomId);
       intent.putExtra(CallActivity.EXTRA_LOOPBACK, loopback);
       intent.putExtra(CallActivity.EXTRA_VIDEO_CALL, videoCallEnabled);

@@ -14,9 +14,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
@@ -24,17 +26,36 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
+import android.telecom.Call;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
+import android.widget.TextView;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.IOException;
 import java.lang.RuntimeException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.appspot.apprtc.AppRTCAudioManager.AudioDevice;
 import org.appspot.apprtc.AppRTCAudioManager.AudioManagerEvents;
@@ -42,6 +63,8 @@ import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
 import org.appspot.apprtc.PeerConnectionClient.DataChannelParameters;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.webrtc.Camera1Enumerator;
 import org.webrtc.Camera2Enumerator;
 import org.webrtc.CameraEnumerator;
@@ -65,9 +88,13 @@ import org.webrtc.VideoRenderer;
  */
 public class CallActivity extends Activity implements AppRTCClient.SignalingEvents,
                                                       PeerConnectionClient.PeerConnectionEvents,
-                                                      CallFragment.OnCallEvents {
+                                                      CallFragment.OnCallEvents, WaitingFragment.OnCallEvents{
   private static final String TAG = CallActivity.class.getSimpleName();
 
+  private Long startTime;
+  private Handler handler = new Handler();
+
+  public static final String EXTRA_APRETER = "org.appspot.apprtc.APRETER";
   public static final String EXTRA_ROOMID = "org.appspot.apprtc.ROOMID";
   public static final String EXTRA_URLPARAMETERS = "org.appspot.apprtc.URLPARAMETERS";
   public static final String EXTRA_LOOPBACK = "org.appspot.apprtc.LOOPBACK";
@@ -176,12 +203,66 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   // Controls
   private CallFragment callFragment;
   private HudFragment hudFragment;
+  private WaitingFragment waitingFragment;
   private CpuMonitor cpuMonitor;
+
+  ProgressDialog pd;
+  Snackbar snackbar;
+  private static String COMMENT_URL="https://shiaoyi.000webhostapp.com/comment.php";
+  private static String RECORD_URL="https://shiaoyi.000webhostapp.com/record.php";
+  private static String CALLFEE_URL="https://shiaoyi.000webhostapp.com/callFee.php";
+
+  View v = null;
+  RatingBar ratingbar ;
+  EditText edit_comment;
+
+  private final static String PREFERENCES_NAME = "preferences";
+  private final static String DEFAULT_EMAIL = "email";
+  SharedPreferences preferences;
+  String email;
+
+  int call_state;
+
+  private final static String PREFERENCES_NAME2 = "preterPreference";
+  private final static String DEFAULT_ID = "id";
+  SharedPreferences preferences2;
+  String id;
+
+
+  int deposit_rest;
+  private static String DEPOSIT_URL="https://shiaoyi.000webhostapp.com/deposit.php";
+
+
+  //  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//  String date = dateFormat.format(new java.util.Date());
+
+  Calendar c = Calendar.getInstance();
+
+  int syear = c.get(Calendar.YEAR);
+  int smonth = c.get(Calendar.MONTH) + 1;
+  int sday = c.get(Calendar.DAY_OF_MONTH);
+  int shour = c.get(Calendar.HOUR_OF_DAY);
+  int sminute = c.get(Calendar.MINUTE);
+  int ssecond = c.get(Calendar.SECOND);
+
+  int fyear = c.get(Calendar.YEAR);
+  int fmonth = c.get(Calendar.MONTH) + 1;
+  int fday = c.get(Calendar.DAY_OF_MONTH);
+  int fhour = c.get(Calendar.HOUR_OF_DAY);
+  int fminute = c.get(Calendar.MINUTE);
+  int fsecond = c.get(Calendar.SECOND);
+
+  int count = 0;
+  Long money;
+  int total;
+  boolean Apreter;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Thread.setDefaultUncaughtExceptionHandler(new UnhandledExceptionHandler(this));
+
+
 
     // Set window styles for fullscreen-window size. Needs to be done before
     // adding content.
@@ -192,6 +273,18 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     getWindow().getDecorView().setSystemUiVisibility(getSystemUiVisibility());
     setContentView(R.layout.activity_call);
 
+    LayoutInflater inflater = LayoutInflater.from(CallActivity.this);
+    v = inflater.inflate(R.layout.dialog_score, null);
+    ratingbar = (RatingBar) v.findViewById(R.id.dialog_ratingbar);
+    edit_comment = (EditText)v.findViewById(R.id.etDesExperience);
+    preferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+    email = preferences.getString("email", DEFAULT_EMAIL);
+    preferences2 = getSharedPreferences(PREFERENCES_NAME2, MODE_PRIVATE);
+    id = preferences2.getString("id", DEFAULT_ID);
+
+
+    pd = new ProgressDialog(CallActivity.this);
+
     iceConnected = false;
     signalingParameters = null;
 
@@ -200,6 +293,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     fullscreenRenderer = (SurfaceViewRenderer) findViewById(R.id.fullscreen_video_view);
     callFragment = new CallFragment();
     hudFragment = new HudFragment();
+    waitingFragment = new WaitingFragment();
 
     // Show/hide call control fragment on view click.
     View.OnClickListener listener = new View.OnClickListener() {
@@ -282,6 +376,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     boolean loopback = intent.getBooleanExtra(EXTRA_LOOPBACK, false);
     boolean tracing = intent.getBooleanExtra(EXTRA_TRACING, false);
+    Apreter = intent.getBooleanExtra(EXTRA_APRETER, false);
 
     int videoWidth = intent.getIntExtra(EXTRA_VIDEO_WIDTH, 0);
     int videoHeight = intent.getIntExtra(EXTRA_VIDEO_HEIGHT, 0);
@@ -340,10 +435,15 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     // Send intent arguments to fragments.
     callFragment.setArguments(intent.getExtras());
     hudFragment.setArguments(intent.getExtras());
+    waitingFragment.setArguments(intent.getExtras());
     // Activate call and HUD fragments and start the call.
+    call_state = 0;
     FragmentTransaction ft = getFragmentManager().beginTransaction();
     ft.add(R.id.call_fragment_container, callFragment);
     ft.add(R.id.hud_fragment_container, hudFragment);
+    ft.add(R.id.waiting_fragment_container,waitingFragment);
+    ft.hide(callFragment);
+    ft.hide(hudFragment);
     ft.commit();
 
     // For command line execution run connection for <runTimeMs> and exit.
@@ -371,6 +471,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
       startCall();
     }
   }
+
 
   @TargetApi(17)
   private DisplayMetrics getDisplayMetrics() {
@@ -497,6 +598,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     activityRunning = false;
     rootEglBase.release();
     super.onDestroy();
+
   }
 
   // CallFragment.OnCallEvents interface implementation.
@@ -582,6 +684,13 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
   // Should be called from UI thread
   private void callConnected() {
+    call_state = 1;
+    FragmentTransaction ft = getFragmentManager().beginTransaction();
+    ft.hide(waitingFragment);
+    ft.show(callFragment);
+    ft.show(hudFragment);
+    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    ft.commit();
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     Log.i(TAG, "Call connected: delay=" + delta + "ms");
     if (peerConnectionClient == null || isError) {
@@ -591,7 +700,124 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     // Enable statistics callback.
     peerConnectionClient.enableStatsEvents(true, STAT_CALLBACK_PERIOD);
     setSwappedFeeds(false /* isSwappedFeeds */);
+    Calendar c1 = Calendar.getInstance();
+    syear = c1.get(Calendar.YEAR);
+    smonth = c1.get(Calendar.MONTH) + 1;
+    sday = c1.get(Calendar.DAY_OF_MONTH);
+    shour = c1.get(Calendar.HOUR_OF_DAY);
+    sminute = c1.get(Calendar.MINUTE);
+    ssecond = c1.get(Calendar.SECOND);
+    depositFetch();
   }
+
+  private void setTimerandDollar() {
+    //取得目前時間
+    startTime = System.currentTimeMillis();
+    if(!Apreter) {
+      //設定定時要執行的方法
+      handler.removeCallbacks(updateTimer);
+      //設定Delay的時間
+      handler.postDelayed(updateTimer, 1000);
+    }else{
+      //設定定時要執行的方法
+      handler.removeCallbacks(updateTimerPreter);
+      //設定Delay的時間
+      handler.postDelayed(updateTimerPreter, 1000);
+    }
+  }
+
+  //固定要執行的方法
+  private Runnable updateTimer = new Runnable() {
+    public void run() {
+      TextView time = (TextView) findViewById(R.id.timer);
+      TextView dollar = (TextView)findViewById(R.id.dollar);
+      TextView deposit = (TextView)findViewById(R.id.deposit);
+      Long spentTime = System.currentTimeMillis() - startTime;
+      //計算目前已過分鐘數
+      Long minius = (spentTime/1000)/60;
+      //計算目前已過秒數
+      Long seconds = (spentTime/1000) % 60;
+      //計算目前的錢
+      money = spentTime/1000/15*5;
+      //計算餘額
+      Long rest = deposit_rest - money;
+      time.setText(minius+":"+seconds);
+      dollar.setText("總計 "+money+"元");
+      deposit.setText("餘額 "+rest+"元");
+      handler.postDelayed(this, 1000);
+    }
+  };
+
+  //固定要執行的方法
+  private Runnable updateTimerPreter = new Runnable() {
+    public void run() {
+      TextView time = (TextView) findViewById(R.id.timer);
+      TextView dollar = (TextView)findViewById(R.id.dollar);
+      TextView deposit = (TextView)findViewById(R.id.deposit);
+      Long spentTime = System.currentTimeMillis() - startTime;
+      //計算目前已過分鐘數
+      Long minius = (spentTime/1000)/60;
+      //計算目前已過秒數
+      Long seconds = (spentTime/1000) % 60;
+      //計算目前的錢
+      money = spentTime/1000/15*5/10*9;
+
+      time.setText(minius+":"+seconds);
+      dollar.setText("累計 "+money+"元");
+      deposit.setText("");
+      handler.postDelayed(this, 1000);
+    }
+  };
+
+  private void depositFetch() {
+
+    RequestQueue queue = Volley.newRequestQueue(CallActivity.this);
+
+    StringRequest postRequest = new StringRequest(Request.Method.POST, DEPOSIT_URL,
+            new Response.Listener<String>() {
+              @Override
+              public void onResponse(String response) {
+                pd.dismiss();
+                //Response
+
+                JSONObject responseJSON = null;
+                try {
+                  responseJSON = new JSONObject(response);
+                  deposit_rest = responseJSON.getInt("deposit");
+                  Log.d("rest", String.valueOf(deposit_rest));
+//                  deposit.setText("餘額"+deposit_rest+"$");
+                  setTimerandDollar();
+
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+
+              }
+            },
+            new Response.ErrorListener() {
+              @Override
+              public void onErrorResponse(VolleyError error) {
+                // error
+                pd.dismiss();
+                Log.d("ErrorResponse", error.getMessage());
+
+              }
+            }
+    ) {
+      @Override
+      protected Map<String, String> getParams() {
+        Map<String, String> params = new HashMap<String, String>();
+
+        params.put("email", email);
+
+        return params;
+      }
+    };
+    postRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    queue.add(postRequest);
+
+  }
+
 
   // This method is called when the audio manager reports audio device change,
   // e.g. from wired headset to speakerphone.
@@ -633,11 +859,221 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     }
     if (iceConnected && !isError) {
       setResult(RESULT_OK);
+      //這裡要先把時間跟錢放進db裡
+
+      if(!Apreter) {
+        Calendar c2 = Calendar.getInstance();
+        fyear = c2.get(Calendar.YEAR);
+        fmonth = c2.get(Calendar.MONTH) + 1;
+        fday = c2.get(Calendar.DAY_OF_MONTH);
+        fhour = c2.get(Calendar.HOUR_OF_DAY);
+        fminute = c2.get(Calendar.MINUTE);
+        fsecond = c2.get(Calendar.SECOND);
+        total = (int) (long) money;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.hide(callFragment);
+        ft.hide(hudFragment);
+        ft.commit();
+        recordRequest();
+        depositRequest();
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.page_Score)
+                .setCancelable(false)
+                .setView(v)
+                .setPositiveButton(R.string.text_btSubmit, new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                    commentRequest();
+                  }
+
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent();
+                    intent.setClass(CallActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                  }
+
+                })
+                .show();
+      }else{
+        Intent intent = new Intent();
+        intent.setClass(CallActivity.this, PreterActivity.class);
+        startActivity(intent);
+      }
     } else {
       setResult(RESULT_CANCELED);
+      if(count == 0) {
+        count = 1;
+        recordRequest();
+      }
     }
-    finish();
+
   }
+
+  private void commentRequest(){
+    pd.setMessage("Upload Comment . . .");
+    pd.show();
+    RequestQueue queue = Volley.newRequestQueue(CallActivity.this);
+
+    StringRequest postRequest = new StringRequest(Request.Method.POST, COMMENT_URL,
+            new Response.Listener<String>()
+            {
+              @Override
+              public void onResponse(String response) {
+                pd.hide();
+                //Response
+                Toast.makeText(getApplication(), response, Toast.LENGTH_LONG).show();
+
+                if(response.equals("Successfully Commented")) {
+
+                  startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+                }
+              }
+            },
+            new Response.ErrorListener()
+            {
+              @Override
+              public void onErrorResponse(VolleyError error) {
+                // error
+                Log.d("ErrorResponse", error.getMessage());
+
+              }
+            }
+    ) {
+      @Override
+      protected Map<String, String> getParams()
+      {
+        Map<String, String>  params = new HashMap<String, String>();
+
+        Log.d("paramsThing",edit_comment.getText().toString()+","+String.valueOf(ratingbar.getRating()));
+
+        params.put("email", email);
+        params.put("preter_id", id);
+        params.put("comment", edit_comment.getText().toString());
+        params.put("rating", String.valueOf(ratingbar.getRating()));
+        params.put("date", fyear + "-" + fmonth + "-" + fday);
+
+        return params;
+      }
+    };
+    postRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    queue.add(postRequest);
+
+  }
+
+  private void recordRequest(){
+//    pd.setMessage("Upload Comment . . .");
+//    pd.show();
+    RequestQueue queue = Volley.newRequestQueue(CallActivity.this);
+
+    StringRequest postRequest = new StringRequest(Request.Method.POST, RECORD_URL,
+            new Response.Listener<String>()
+            {
+              @Override
+              public void onResponse(String response) {
+                pd.hide();
+                //Response
+                Log.d("response", response);
+
+                if(response.equals("Successfully Record")) {
+
+                  if(count == 1) {
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                  }
+                }
+              }
+            },
+            new Response.ErrorListener()
+            {
+              @Override
+              public void onErrorResponse(VolleyError error) {
+                // error
+                Log.d("ErrorResponse", error.getMessage());
+
+              }
+            }
+    ) {
+      @Override
+      protected Map<String, String> getParams()
+      {
+        Map<String, String>  params = new HashMap<String, String>();
+
+        Log.d("recordThing"," ");
+
+        params.put("email", email);
+        params.put("preter_id", id);
+
+        params.put("call_state", String.valueOf(call_state));
+        params.put("cash",String.valueOf(total));
+        params.put("starttime",syear + "-" + smonth + "-" + sday + " " + shour + ":" + sminute + ":" + ssecond);
+        params.put("finishtime",fyear + "-" + fmonth + "-" + fday + " " + fhour + ":" + fminute + ":" + fsecond);
+
+        return params;
+      }
+    };
+    postRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    queue.add(postRequest);
+
+  }
+
+  private void depositRequest(){
+
+    RequestQueue queue = Volley.newRequestQueue(CallActivity.this);
+
+    StringRequest postRequest = new StringRequest(Request.Method.POST, CALLFEE_URL,
+            new Response.Listener<String>()
+            {
+              @Override
+              public void onResponse(String response) {
+                pd.hide();
+                //Response
+                Log.d("response", response);
+
+                if(response.equals("Successfully Record")) {
+
+                  if(count == 1) {
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                  }
+                }
+              }
+            },
+            new Response.ErrorListener()
+            {
+              @Override
+              public void onErrorResponse(VolleyError error) {
+                // error
+                Log.d("ErrorResponse", error.getMessage());
+
+              }
+            }
+    ) {
+      @Override
+      protected Map<String, String> getParams()
+      {
+        Map<String, String>  params = new HashMap<String, String>();
+
+        Log.d("recordThing"," ");
+
+        params.put("email", email);
+
+        params.put("call_state", String.valueOf(call_state));
+        params.put("cash",String.valueOf(total));
+        params.put("starttime",syear + "-" + smonth + "-" + sday + " " + shour + ":" + sminute + ":" + ssecond);
+
+        return params;
+      }
+    };
+    postRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    queue.add(postRequest);
+
+  }
+
+
+
 
   private void disconnectWithErrorMessage(final String errorMessage) {
     if (commandLineRun || !activityRunning) {
@@ -730,7 +1166,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
 
     signalingParameters = params;
-    logAndToast("Creating peer connection, delay=" + delta + "ms");
+//    logAndToast("Creating peer connection, delay=" + delta + "ms");
     VideoCapturer videoCapturer = null;
     if (peerConnectionParameters.videoCallEnabled) {
       videoCapturer = createVideoCapturer();
@@ -773,6 +1209,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   @Override
   public void onRemoteDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
+
     runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -790,7 +1227,9 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         }
       }
     });
+
   }
+
 
   @Override
   public void onRemoteIceCandidate(final IceCandidate candidate) {
@@ -892,7 +1331,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        logAndToast("ICE connected, delay=" + delta + "ms");
+//        logAndToast("ICE connected, delay=" + delta + "ms");
         iceConnected = true;
         callConnected();
       }

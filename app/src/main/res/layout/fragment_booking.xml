@@ -1,0 +1,175 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="16dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="16dp"
+    tools:context=".BookingActivity">
+
+
+
+
+    <TextView
+        android:id="@+id/tvLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_tvLanguage"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spLanguage"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvLanguage"
+        android:layout_alignLeft="@+id/tvLanguage"
+        android:entries="@array/language_array" />
+
+    <TextView
+        android:id="@+id/tvTranslator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/spLanguage"
+        android:text="@string/text_tvTranslator"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spTranslator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvTranslator"
+        android:layout_alignLeft="@+id/tvTranslator"/>
+
+    <TextView
+        android:id="@+id/tvReserveDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/spTranslator"
+        android:text="@string/text_tvReserveDate"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignLeft="@+id/tvReserveDate"
+        android:background="@drawable/back"
+        android:text="@string/text_tvDate"
+        android:textSize="20sp"
+        android:textColor="@color/colorContent"
+        android:padding="4dp"
+        android:layout_below="@+id/tvReserveDate"/>
+
+    <Button
+        android:id="@+id/btDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@+id/tvReserveDate"
+        android:layout_alignTop="@+id/tvDate"
+        android:layout_toEndOf="@+id/tvDate"
+        android:text="@string/text_btDatePicker"
+        android:layout_toRightOf="@+id/tvDate"
+        android:onClick="onDateClick"
+        android:background="@drawable/btn_background"/>
+
+    <TextView
+        android:id="@+id/tvReserveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tvDate"
+        android:text="@string/text_tvReserveTime"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignLeft="@+id/tvReserveTime"
+        android:background="@drawable/back"
+        android:text="@string/text_tvTime"
+        android:textSize="20sp"
+        android:textColor="@color/colorContent"
+        android:layout_below="@+id/tvReserveTime"/>
+
+    <Button
+        android:id="@+id/btStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/tvStartTime"
+        android:layout_toEndOf="@+id/tvStartTime"
+        android:text="@string/text_btTimePickerStart"
+        android:layout_toRightOf="@+id/tvStartTime"
+        android:onClick="onTimeStartClick"
+        android:background="@drawable/btn_background"/>
+
+    <TextView
+        android:id="@+id/tvEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignLeft="@+id/tvStartTime"
+        android:background="@drawable/back"
+        android:text="@string/text_tvTime"
+        android:textSize="20sp"
+        android:textColor="@color/colorContent"
+        android:layout_below="@+id/tvStartTime"/>
+
+        <Button
+            android:id="@+id/btEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignTop="@+id/tvEndTime"
+            android:layout_toEndOf="@+id/tvEndTime"
+            android:layout_toRightOf="@+id/tvEndTime"
+            android:background="@drawable/btn_background"
+            android:onClick="onTimeEndClick"
+            android:text="@string/text_btTimePickerEnd" />
+
+        <TextView
+            android:id="@+id/tvTextSay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tvEndTime"
+            android:text="@string/say"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etSay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/tvTextSay"
+            android:layout_alignLeft="@+id/tvTextSay"/>
+
+    <Button
+        android:id="@+id/btReserveSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/etSay"
+        android:layout_below="@+id/etSay"
+        android:layout_marginTop="20dp"
+        android:onClick="onSubmitClick"
+        android:text="@string/text_btSubmit"
+        android:background="@drawable/btn_submit"/>
+
+
+</RelativeLayout>
+</ScrollView>

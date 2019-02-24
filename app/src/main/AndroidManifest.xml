@@ -18,15 +18,18 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.BLUETOOTH"/>
+  <uses-permission android:name="android.permission.READ_CONTACTS" />
+  <uses-permission android:name="android.permission.READ_PROFILE" />
 
   <application
       android:label="@string/app_name"
-      android:icon="@drawable/ic_launcher"
+      android:icon="@drawable/ic_chopreter"
       android:allowBackup="false"
+      android:theme="@style/AppTheme"
       >
 
     <activity
-        android:name="ConnectActivity"
+        android:name=".MainActivity"
         android:label="@string/app_name"
         android:windowSoftInputMode="adjustPan"
         >
@@ -52,9 +55,115 @@
       </intent-filter>
     </activity>
 
+    <service
+        android:name=".MyFirebaseInstanceIDService">
+      <intent-filter>
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+      </intent-filter>
+    </service>
+
+    <service
+        android:name=".MyFirebaseMessagingService">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+      </intent-filter>
+    </service>
+
     <activity
         android:name="SettingsActivity"
         android:label="@string/settings_name"
+        >
+    </activity>
+
+    <activity
+        android:name="SettingActivity"
+        android:label="@string/settings_name"
+        >
+    </activity>
+
+    <activity
+        android:name=".LoginActivity"
+        android:label="@string/action_log_in"
+        >
+    </activity>
+
+    <activity
+        android:name=".EmailActivity"
+        android:label="@string/page_Booking"
+        >
+    </activity>
+
+    <activity
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:name=".CallingActivity"
+        android:label="@string/page_Calling"
+        >
+    </activity>
+
+    <activity
+        android:name=".TransLoginActivity"
+        android:label="@string/action_interpreter_log_in"
+        >
+    </activity>
+
+    <activity
+        android:name=".RegisterActivity"
+        android:label="@string/action_sign_up"
+        >
+    </activity>
+
+    <activity
+        android:name=".CreditCard"
+        android:label="@string/credit_card"
+        >
+    </activity>
+
+    <activity
+        android:name=".OpayLogin"
+        android:label="@string/opay"
+        >
+    </activity>
+
+    <activity
+        android:name=".HomeActivity"
+        android:label="@string/page_Main"
+        >
+    </activity>
+
+    <activity
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:name=".PreterActivity"
+        android:label="@string/page_Main"
+        >
+    </activity>
+
+    <activity
+        android:name=".RatingActivity"
+        android:label="@string/page_Main"
+        >
+    </activity>
+
+
+    <activity
+        android:name=".TransRegisterActivity"
+        android:label="@string/action_sign_up"
+        >
+    </activity>
+
+    <activity
+        android:name=".ConnectActivity"
+        android:label="@string/page_Main"
+        >
+    </activity>
+
+    <activity
+        android:name=".BookingActivity"
+        android:label="@string/page_Booking"
+        android:parentActivityName="HomeActivity" >
+      <!-- The meta-data element is needed for versions lower than 4.1 -->
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".HomeActivity" />
         >
     </activity>
 

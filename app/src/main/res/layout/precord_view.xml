@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin">
+
+
+        <TextView
+            android:id="@+id/tvPrecordName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Name" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvPrecordlang"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="3dp"-->
+            <!--android:layout_toRightOf="@+id/tvPrecordName"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@drawable/score_background"-->
+            <!--android:textSize="18dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="Lang" />-->
+
+
+        <TextView
+            android:id="@+id/tvPrecordTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPrecordName"
+            android:padding="3dp"
+            android:text="通話時間 15:45"
+            android:textColor="@color/logoGray" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvPrecordDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="2018-5-31"
+            android:textColor="@color/lightGray"
+            android:layout_gravity="right"/>
+
+        <TextView
+            android:id="@+id/tvPrecordDollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="14dp"
+            android:textColor="@color/logoGray"
+            android:padding="2dp"
+            android:text="TWD 315"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:layout_gravity="center_horizontal"
+    card_view:cardBackgroundColor="@color/black"
+    card_view:cardCornerRadius="20dp"
+    card_view:contentPadding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="#EDE6DE"
+        card_view:cardCornerRadius="20dp"
+        card_view:contentPadding="5dp">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/tvTimeReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="2018年7月明細"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"/>
+
+    <View
+        android:id="@+id/line_receipt"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginBottom="12dp"
+        android:layout_below="@+id/tvTimeReceipt"
+        android:background="@color/lightGray"/>
+
+    <TextView
+        android:id="@+id/tvIdReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_receipt"
+        android:gravity="left"
+        android:layout_marginBottom="6dp"
+        android:text="@string/id_receipt"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/idReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_receipt"
+        android:layout_alignBaseline="@+id/tvIdReceipt"
+        android:gravity="right"
+        android:layout_marginBottom="6dp"
+        android:text="07865779"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvSituationReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvIdReceipt"
+        android:gravity="left"
+        android:layout_marginBottom="6dp"
+        android:text="@string/situation_receipt"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/situationReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/idReceipt"
+        android:layout_alignBaseline="@+id/tvSituationReceipt"
+        android:gravity="right"
+        android:layout_marginBottom="6dp"
+        android:text="未入款"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvDollarReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSituationReceipt"
+        android:gravity="left"
+        android:layout_marginBottom="6dp"
+        android:text="@string/dollar_receipt"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/dollarReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/situationReceipt"
+        android:layout_alignBaseline="@+id/tvDollarReceipt"
+        android:gravity="right"
+        android:layout_marginBottom="6dp"
+        android:text="TWD 180"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tvPaydayReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDollarReceipt"
+        android:gravity="left"
+        android:layout_marginBottom="6dp"
+        android:text="@string/payday_receipt"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/paydayReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dollarReceipt"
+        android:layout_alignBaseline="@+id/tvPaydayReceipt"
+        android:gravity="right"
+        android:layout_marginBottom="6dp"
+        android:text="2018-7-31"
+        android:textSize="16dp"/>
+
+</RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>

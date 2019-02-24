@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+
+        <item
+            android:id="@+id/item_Schedule"
+            android:checked="true"
+            android:title="@string/page_Schedule"
+            android:enabled="true"
+            android:icon="@drawable/calendar_white_24"
+            app:showAsAction="ifRoom"/>
+
+        <item
+            android:id="@+id/item_Profile"
+            android:title="@string/page_Profile"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/profile_white_24"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/item_Score"
+            android:title="@string/page_Score"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/comments_white_24"
+            app:showAsAction="ifRoom" />
+
+
+        <item
+            android:id="@+id/item_Receipt"
+            android:title="@string/page_Receipt"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/receipt_white_24"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/item_Preter_Record"
+            android:title="@string/page_Record"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/record_white_24"
+            app:showAsAction="ifRoom"/>
+
+
+
+</menu>

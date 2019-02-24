@@ -13,7 +13,9 @@ package org.appspot.apprtc;
 import org.appspot.apprtc.util.AsyncHttpURLConnection;
 import org.appspot.apprtc.util.AsyncHttpURLConnection.AsyncHttpEvents;
 
+import android.app.Activity;
 import android.os.Handler;
+import android.os.Bundle;
 import android.util.Log;
 
 import de.tavendo.autobahn.WebSocket.WebSocketConnectionObserver;
@@ -22,6 +24,7 @@ import de.tavendo.autobahn.WebSocketException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,7 +38,7 @@ import java.util.LinkedList;
  * All events are dispatched on the same thread.
  */
 
-public class WebSocketChannelClient {
+public class WebSocketChannelClient extends Activity {
   private static final String TAG = "WSChannelRTCClient";
   private static final int CLOSE_TIMEOUT = 1000;
   private final WebSocketChannelEvents events;
@@ -52,6 +55,7 @@ public class WebSocketChannelClient {
   // WebSocket send queue. Messages are added to the queue when WebSocket
   // client is not registered and are consumed in register() call.
   private final LinkedList<String> wsSendQueue;
+
 
   /**
    * Possible WebSocket connection states.
@@ -274,6 +278,7 @@ public class WebSocketChannelClient {
 
     @Override
     public void onTextMessage(String payload) {
+
       Log.d(TAG, "WSS->C: " + payload);
       final String message = payload;
       handler.post(new Runnable() {
@@ -286,6 +291,7 @@ public class WebSocketChannelClient {
         }
       });
     }
+
 
     @Override
     public void onRawTextMessage(byte[] payload) {}

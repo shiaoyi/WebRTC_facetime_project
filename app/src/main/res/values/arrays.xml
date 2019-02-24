@@ -54,7 +54,17 @@
     </string-array>
 
     <string-array name="roomListContextMenu">
-        <item>Remove favorite</item>
+        <item>@string/item_removeContacts</item>
+        <item>@string/item_addContacts</item>
+    </string-array>
+
+    <string-array name="language_array">
+        <item>@string/language_english</item>
+        <item>@string/language_indonesia</item>
+    </string-array>
+
+    <string-array name="usual_language_array">
+        <item>@string/language_chinese</item>
     </string-array>
 
 </resources>
